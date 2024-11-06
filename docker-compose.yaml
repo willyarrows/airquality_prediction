@@ -1,0 +1,20 @@
+name: air_quality_prediction
+services:
+  streamlit:
+    build:
+      context: .
+      dockerfile: ./docker/streamlit/Dockerfile
+    image: willyarrows/air_quality_prediction-streamlit
+    container_name: streamlit_frontend
+    depends_on:
+      - api
+    ports:
+      - 8501:8501
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    image: willyarrows/air_quality_prediction-api
+    container_name: api_backend
+    ports:
+      - 8080:8080
